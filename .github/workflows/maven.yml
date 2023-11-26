@@ -36,7 +36,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: aws-ec2
+    runs-on: ubuntu-22.04
     steps:
       - name: Login to docker hub
         run: sudo docker login -u pabloc43 -p 123456789
