@@ -1,6 +1,7 @@
 package com.grupo3.digitalbook.demo.controller;
 
 import com.grupo3.digitalbook.demo.entity.Dto.UserDto;
+import com.grupo3.digitalbook.demo.entity.Role;
 import com.grupo3.digitalbook.demo.entity.User;
 import com.grupo3.digitalbook.demo.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,16 @@ public class UserController {
             return ResponseEntity.ok(userDto);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    @PutMapping("/{id}/role")
+    public ResponseEntity<String> changeUserRole(@PathVariable Long id, @RequestParam Role newRole) {
+        try {
+            userService.changeUserRole(id, newRole);
+            return ResponseEntity.ok("Rol de usuario cambiado exitosamente");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
         }
     }
 

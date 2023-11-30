@@ -1,5 +1,6 @@
 package com.grupo3.digitalbook.demo.service.impl;
 
+import com.grupo3.digitalbook.demo.entity.Role;
 import com.grupo3.digitalbook.demo.entity.User;
 import com.grupo3.digitalbook.demo.repository.UserRepository;
 import com.grupo3.digitalbook.demo.service.IUserService;
@@ -36,6 +37,13 @@ public class UserServiceImpl implements IUserService {
             return userOptional.get();
         }
         throw new RuntimeException("Usuario no encontrado");
+    }
+
+    @Override
+    public void changeUserRole(Long userId, Role newRole) {
+        User user = findUserById(userId);
+        user.setRole(newRole);
+        userRepository.save(user);
     }
 }
 
